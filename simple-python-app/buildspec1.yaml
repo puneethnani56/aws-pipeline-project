@@ -16,7 +16,7 @@ phases:
       - echo "Installing dependencies..."
       - pip install -r simple-python-app/requirements.txt
       # Log in to Docker (assuming credentials are available in CodeBuild or ECR)
-      - echo "Logging in to Docker registry..."
+      - echo "Logging in to Docker registry...!!!"
       - echo "${DOCKER_REGISTRY_PASSWORD}" | docker login "${DOCKER_REGISTRY_URL}" -u "${DOCKER_REGISTRY_USERNAME}" --password-stdin
 
   build:
