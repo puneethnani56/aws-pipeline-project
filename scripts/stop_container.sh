@@ -1,11 +1,17 @@
 #!/bin/bash
 set -e
 
-# Stop the running container (if any)
 echo "Stopping old container..."
-CONTAINER_ID=$(docker ps -q --filter "publish=5000")
-if [ ! -z "$CONTAINER_ID" ]; then
-    docker stop $CONTAINER_ID
-    docker rm $CONTAINER_ID
+
+# Find containers running your image
+CONTAINER_ID=$(docker ps --filter "ancestor=stark56/simple-python-app:latest" --format "{{.ID}}")
+
+if [ -n "$CONTAINER_ID" ]; then
+    echo "Found container $CONTAINER_ID. Stopping..."
+    docker rm -f $CONTAINER_ID
+    echo "Old container stopped and removed."
+else
+    echo "No running container found for stark56/simple-python-app."
 fi
+
 
